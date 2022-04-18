@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float scaleReduction = 0.1f;
     [SerializeField] Transform cameraTransform;
     [SerializeField] GameObject cube;
+    UnityEvent gameOverEvent;
     Vector3 targetPosition;
     Vector3 startPosition;
     Vector3 cameraRight;
@@ -26,6 +28,11 @@ public class PlayerMovement : MonoBehaviour
         cameraForward.x = 0;
         cameraForward.y = 0;
         cameraForward.Normalize();
+
+        if (gameOverEvent == null)
+        {
+            gameOverEvent = new UnityEvent();
+        }
     }
 
     // Update is called once per frame
@@ -86,5 +93,9 @@ public class PlayerMovement : MonoBehaviour
     void ReduceCube()
     {
         cube.transform.localScale -= scaleVector;
+        if (cube.transform.localScale.x <= 0)
+        {
+            gameOverEvent.Invoke();
+        }
     }
 }
