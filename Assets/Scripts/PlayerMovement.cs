@@ -43,26 +43,38 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
         {
             targetPosition = transform.position - cameraRight;
-            startPosition = transform.position;
-            moving = true;
+            if (Physics.CheckSphere(targetPosition, 0.5f))
+            {
+                startPosition = transform.position;
+                moving = true;
+            }
         }
         else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
         {
             targetPosition = transform.position + cameraRight;
-            startPosition = transform.position;
-            moving = true;
+            if (Physics.CheckSphere(targetPosition, 0.5f))
+            {
+                startPosition = transform.position;
+                moving = true;
+            }
         }
         else if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
         {
             targetPosition = transform.position + cameraForward;
-            startPosition = transform.position;
-            moving = true;
+            if (Physics.CheckSphere(targetPosition, 0.5f))
+            {
+                startPosition = transform.position;
+                moving = true;
+            }
         }
         else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
         {
             targetPosition = transform.position - cameraForward;
-            startPosition = transform.position;
-            moving = true;
+            if (Physics.CheckSphere(targetPosition, 0.5f))
+            {
+                startPosition = transform.position;
+                moving = true;
+            }
         }
     }
 }
