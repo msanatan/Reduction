@@ -4,16 +4,20 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] float moveSpeed = 5f;
     [SerializeField] float snapDistance = 1f;
+    [SerializeField] float scaleReduction = 0.1f;
     [SerializeField] Transform cameraTransform;
+    [SerializeField] GameObject cube;
     Vector3 targetPosition;
     Vector3 startPosition;
     Vector3 cameraRight;
     Vector3 cameraForward;
+    Vector3 scaleVector;
     bool moving = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        scaleVector = new Vector3(scaleReduction, scaleReduction, scaleReduction);
         cameraRight = cameraTransform.right;
         cameraRight.y = 0;
         cameraRight.z = 0;
@@ -33,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 transform.position = targetPosition;
                 moving = false;
+                ReduceCube();
                 return;
             }
 
@@ -76,5 +81,10 @@ public class PlayerMovement : MonoBehaviour
                 moving = true;
             }
         }
+    }
+
+    void ReduceCube()
+    {
+        cube.transform.localScale -= scaleVector;
     }
 }
