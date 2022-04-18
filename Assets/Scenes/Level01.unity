@@ -383,7 +383,7 @@ MonoBehaviour:
   moveSpeed: 10
   snapDistance: 1
   cameraTransform: {fileID: 1687258585}
-  cube: {fileID: 0}
+  cube: {fileID: 1661770803}
 --- !u!1 &1661770803
 GameObject:
   m_ObjectHideFlags: 0
