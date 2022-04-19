@@ -92,6 +92,8 @@ public class PlayerMovement : MonoBehaviour
     void ReducePlayer()
     {
         transform.localScale -= scaleVector;
+        // Move the cube's position down so it continues to touch the floor
+        transform.position -= new Vector3(0, scaleReduction / 2, 0);
         if (transform.localScale.x <= 0)
         {
             Debug.Log("Game over");
