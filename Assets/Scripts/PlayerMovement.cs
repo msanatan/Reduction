@@ -7,7 +7,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float snapDistance = 1f;
     [SerializeField] float scaleReduction = 0.1f;
     [SerializeField] Transform cameraTransform;
-    [SerializeField] GameObject cube;
     UnityEvent gameOverEvent;
     Vector3 targetPosition;
     Vector3 startPosition;
@@ -44,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 transform.position = targetPosition;
                 moving = false;
-                ReduceCube();
+                ReducePlayer();
                 return;
             }
 
@@ -90,11 +89,12 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void ReduceCube()
+    void ReducePlayer()
     {
-        cube.transform.localScale -= scaleVector;
-        if (cube.transform.localScale.x <= 0)
+        transform.localScale -= scaleVector;
+        if (transform.localScale.x <= 0)
         {
+            Debug.Log("Game over");
             gameOverEvent.Invoke();
         }
     }
