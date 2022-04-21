@@ -20,12 +20,23 @@ public class PlayerMovement : MonoBehaviour
     {
         scaleVector = new Vector3(scaleReduction, scaleReduction, scaleReduction);
         cameraRight = cameraTransform.right;
+        Debug.Log(cameraTransform.right);
+        Debug.Log(cameraTransform.forward);
         cameraRight.y = 0;
-        cameraRight.z = 0;
+        if (cameraRight.x != 0)
+        {
+            cameraRight.z = 0;
+        }
+
         cameraRight.Normalize();
+
         cameraForward = cameraTransform.forward;
-        cameraForward.x = 0;
         cameraForward.y = 0;
+        if (cameraForward.z != 0)
+        {
+            cameraForward.x = 0;
+        }
+
         cameraForward.Normalize();
 
         if (gameOverEvent == null)
