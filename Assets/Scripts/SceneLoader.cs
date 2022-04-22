@@ -17,4 +17,9 @@ public class SceneLoader : MonoBehaviour
         yield return new WaitForSeconds(1);
         SceneManager.LoadSceneAsync(levelIndex, LoadSceneMode.Single);
     }
+
+    public void LoadMainMenu()
+    {
+        StartCoroutine(LoadLevel(0));
+    }
 }
