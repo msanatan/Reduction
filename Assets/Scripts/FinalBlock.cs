@@ -7,7 +7,10 @@ public class FinalBlock : MonoBehaviour
 
     private void Start()
     {
-        levelCompleteEvent = new UnityEvent();
+        if (levelCompleteEvent == null)
+        {
+            levelCompleteEvent = new UnityEvent();
+        }
     }
 
     private void OnTriggerEnter(Collider other)
