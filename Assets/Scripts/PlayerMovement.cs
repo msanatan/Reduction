@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float snapDistance = 1f;
     [SerializeField] float scaleReduction = 0.1f;
     [SerializeField] Transform cameraTransform;
-    UnityEvent gameOverEvent;
+    public UnityEvent gameOverEvent;
     Vector3 targetPosition;
     Vector3 startPosition;
     Vector3 cameraRight;

@@ -3,7 +3,7 @@ using UnityEngine.Events;
 
 public class FinalBlock : MonoBehaviour
 {
-    UnityEvent levelCompleteEvent;
+    public UnityEvent levelCompleteEvent;
 
     private void Start()
     {
