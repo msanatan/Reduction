@@ -4,6 +4,9 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
+    public Animator animator;
+    public float transitionTime = 1f;
+
     public void LoadNextScene()
     {
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
@@ -23,9 +26,8 @@ public class SceneLoader : MonoBehaviour
 
     IEnumerator LoadLevel(int levelIndex)
     {
-        // TODO: Run transition
-        //transition.SetTrigger("Start");
-        yield return new WaitForSeconds(1);
+        animator.SetTrigger("Start");
+        yield return new WaitForSeconds(transitionTime);
         SceneManager.LoadSceneAsync(levelIndex, LoadSceneMode.Single);
     }
 }
