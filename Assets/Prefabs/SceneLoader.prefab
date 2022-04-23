@@ -150,7 +150,7 @@ GameObject:
   - component: {fileID: 3019757434160568376}
   - component: {fileID: 1193031146742716984}
   m_Layer: 0
-  m_Name: SceneWipe
+  m_Name: WipeDown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
