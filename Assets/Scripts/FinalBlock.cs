@@ -18,6 +18,7 @@ public class FinalBlock : MonoBehaviour
         if (other.tag == "Player")
         {
             Debug.Log("Level complete");
+            Destroy(gameObject);
             levelCompleteEvent.Invoke();
         }
     }
