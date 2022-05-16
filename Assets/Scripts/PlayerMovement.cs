@@ -10,8 +10,6 @@ public class PlayerMovement : MonoBehaviour
     public UnityEvent gameOverEvent;
     Vector3 targetPosition;
     Vector3 startPosition;
-    Vector3 cameraRight;
-    Vector3 cameraForward;
     Vector3 scaleVector;
     bool moving = false;
 
@@ -19,26 +17,6 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         scaleVector = new Vector3(scaleReduction, scaleReduction, scaleReduction);
-        cameraRight = cameraTransform.right;
-        Debug.Log(cameraTransform.right);
-        Debug.Log(cameraTransform.forward);
-        cameraRight.y = 0;
-        if (cameraRight.x != 0)
-        {
-            cameraRight.z = 0;
-        }
-
-        cameraRight.Normalize();
-
-        cameraForward = cameraTransform.forward;
-        cameraForward.y = 0;
-        if (cameraForward.z != 0)
-        {
-            cameraForward.x = 0;
-        }
-
-        cameraForward.Normalize();
-
         if (gameOverEvent == null)
         {
             gameOverEvent = new UnityEvent();
@@ -64,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            targetPosition = transform.position - cameraRight;
+            targetPosition = transform.position + Vector3.left;
             if (Physics.CheckSphere(targetPosition, 0.5f))
             {
                 startPosition = transform.position;
@@ -73,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
         {
-            targetPosition = transform.position + cameraRight;
+            targetPosition = transform.position + Vector3.right;
             if (Physics.CheckSphere(targetPosition, 0.5f))
             {
                 startPosition = transform.position;
@@ -82,7 +60,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
         {
-            targetPosition = transform.position + cameraForward;
+            targetPosition = transform.position + Vector3.forward;
             if (Physics.CheckSphere(targetPosition, 0.5f))
             {
                 startPosition = transform.position;
@@ -91,7 +69,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
         {
-            targetPosition = transform.position - cameraForward;
+            targetPosition = transform.position + Vector3.back;
             if (Physics.CheckSphere(targetPosition, 0.5f))
             {
                 startPosition = transform.position;
