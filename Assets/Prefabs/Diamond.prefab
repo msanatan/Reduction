@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4189544691087168859}
   - component: {fileID: 7110621490202086325}
+  - component: {fileID: 4934254753839525745}
   m_Layer: 0
   m_Name: Diamond
   m_TagString: Finish
@@ -48,6 +49,20 @@ MonoBehaviour:
   levelCompleteEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!64 &4934254753839525745
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3562224295514968033}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -2432090755550338912, guid: c9d623173c0a941759bb40eae9142aba, type: 3}
 --- !u!1 &5540091646043813688
 GameObject:
   m_ObjectHideFlags: 0
@@ -59,7 +74,6 @@ GameObject:
   - component: {fileID: 3626651700499244035}
   - component: {fileID: 1910471675564055881}
   - component: {fileID: 3145449866270079453}
-  - component: {fileID: 1791275150085796861}
   m_Layer: 0
   m_Name: default
   m_TagString: Untagged
@@ -132,17 +146,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &1791275150085796861
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5540091646043813688}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -2432090755550338912, guid: c9d623173c0a941759bb40eae9142aba, type: 3}
