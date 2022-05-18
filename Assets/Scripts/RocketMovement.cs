@@ -7,16 +7,28 @@ public class RocketMovement : MonoBehaviour
     [SerializeField] Vector3 movement;
     [SerializeField] float movementDuration = 3f;
     [SerializeField] float rotationDuration = 1f;
+    [SerializeField] float movementDelay = 0.5f;
+    [SerializeField] float rotationDelay = 0.5f;
+    [SerializeField] float startDelay = 0;
     Vector3 originalPosition;
     Vector3 destination;
     float rotationDegrees;
     bool returnMovement = false;
+
     // Start is called before the first frame update
     void Start()
     {
         originalPosition = transform.position;
         LeanTween.cancel(gameObject);
-        MoveTween();
+
+        if (startDelay != 0)
+        {
+            Invoke("MoveTween", startDelay);
+        }
+        else
+        {
+            MoveTween();
+        }
     }
 
     void MoveTween()
@@ -31,7 +43,7 @@ public class RocketMovement : MonoBehaviour
         }
 
         LeanTween.move(gameObject, destination, movementDuration)
-            .setDelay(1f)
+            .setDelay(movementDelay)
             .setOnComplete(RotateAndPause);
     }
 
@@ -49,7 +61,7 @@ public class RocketMovement : MonoBehaviour
         returnMovement = !returnMovement; // Flip flag after rotation
 
         LeanTween.rotateAroundLocal(gameObject, Vector3.left, rotationDegrees, rotationDuration)
-            .setDelay(1f)
+            .setDelay(rotationDelay)
             .setOnComplete(MoveTween);
     }
 }

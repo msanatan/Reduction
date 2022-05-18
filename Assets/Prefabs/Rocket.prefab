@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 7124615492462503808}
   - component: {fileID: 5334680157436960458}
   - component: {fileID: 8875800432576428638}
-  - component: {fileID: 5210717311332462718}
   m_Layer: 0
   m_Name: default
   m_TagString: Untagged
@@ -84,20 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &5210717311332462718
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2047334032247026875}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -2432090755550338912, guid: 7bc17fe94826543399f60943fe6f4949, type: 3}
 --- !u!1 &7053864710470732898
 GameObject:
   m_ObjectHideFlags: 0
@@ -111,7 +96,7 @@ GameObject:
   - component: {fileID: 7584315719585109170}
   m_Layer: 0
   m_Name: Rocket
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -159,3 +144,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movement: {x: 3, y: 0, z: 0}
+  movementDuration: 2
+  rotationDuration: 1
