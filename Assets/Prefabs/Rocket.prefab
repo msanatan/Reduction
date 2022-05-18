@@ -108,6 +108,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7687517262499403480}
   - component: {fileID: 7864750895501193521}
+  - component: {fileID: 7584315719585109170}
   m_Layer: 0
   m_Name: Rocket
   m_TagString: Untagged
@@ -145,3 +146,16 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -2432090755550338912, guid: 7bc17fe94826543399f60943fe6f4949, type: 3}
+--- !u!114 &7584315719585109170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7053864710470732898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15ae99e386e6b41588ac291d987621cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movement: {x: 3, y: 0, z: 0}
