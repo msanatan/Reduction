@@ -83,10 +83,26 @@ public class PlayerMovement : MonoBehaviour
         transform.localScale -= scaleVector;
         // Move the cube's position down so it continues to touch the floor
         transform.position -= new Vector3(0, scaleReduction / 2, 0);
+        CheckGameOver();
+    }
+
+    void CheckGameOver()
+    {
         if (transform.localScale.x <= 0)
         {
             Debug.Log("Game over");
             gameOverEvent.Invoke();
+        }
+    }
+
+    void OnTriggerEnter(Collider collider)
+    {
+        if (collider.transform.tag == "Obstacle")
+        {
+            Destroy(collider.gameObject);
+            transform.localScale -= scaleVector * 2;
+            transform.position -= new Vector3(0, scaleReduction, 0);
+            CheckGameOver();
         }
     }
 }
