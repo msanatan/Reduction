@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
@@ -8,12 +9,66 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float scaleReduction = 0.1f;
     [SerializeField] Transform cameraTransform;
     public UnityEvent gameOverEvent;
+    PlayerMovement input = null;
+    Vector2 moveVector = Vector2.zero;
     Vector3 targetPosition;
     Vector3 startPosition;
     Vector3 scaleVector;
     bool moving = false;
 
-    // Start is called before the first frame update
+    void Awake()
+    {
+        input = new PlayerMovement();
+    }
+
+    void OnEnable()
+    {
+        input.Enable();
+        input.Player.Movement.performed += OnMovementPerformed;
+        input.Player.Movement.canceled += OnMovementCancelled;
+    }
+
+    void OnDisable()
+    {
+        input.Enable();
+        input.Player.Movement.performed -= OnMovementPerformed;
+        input.Player.Movement.canceled -= OnMovementCancelled;
+    }
+
+    private void OnMovementCancelled(InputAction.CallbackContext context)
+    {
+        return;
+    }
+
+    private void OnMovementPerformed(InputAction.CallbackContext context)
+    {
+        if (moving) return; // No new inputs while moving
+
+        moveVector = context.ReadValue<Vector2>();
+        if (moveVector.y == 1)
+        {
+            targetPosition = transform.position + Vector3.forward;
+        }
+        else if (moveVector.y == -1)
+        {
+            targetPosition = transform.position + Vector3.back;
+        }
+        else if (moveVector.x == 1)
+        {
+            targetPosition = transform.position + Vector3.right;
+        }
+        else if (moveVector.x == -1)
+        {
+            targetPosition = transform.position + Vector3.left;
+        }
+
+        if (Physics.CheckSphere(targetPosition, 0.5f))
+        {
+            startPosition = transform.position;
+            moving = true;
+        }
+    }
+
     void Start()
     {
         scaleVector = new Vector3(scaleReduction, scaleReduction, scaleReduction);
@@ -38,43 +93,6 @@ public class PlayerController : MonoBehaviour
 
             transform.position += (targetPosition - startPosition) * moveSpeed * Time.deltaTime;
             return;
-        }
-
-        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            targetPosition = transform.position + Vector3.left;
-            if (Physics.CheckSphere(targetPosition, 0.5f))
-            {
-                startPosition = transform.position;
-                moving = true;
-            }
-        }
-        else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            targetPosition = transform.position + Vector3.right;
-            if (Physics.CheckSphere(targetPosition, 0.5f))
-            {
-                startPosition = transform.position;
-                moving = true;
-            }
-        }
-        else if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            targetPosition = transform.position + Vector3.forward;
-            if (Physics.CheckSphere(targetPosition, 0.5f))
-            {
-                startPosition = transform.position;
-                moving = true;
-            }
-        }
-        else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            targetPosition = transform.position + Vector3.back;
-            if (Physics.CheckSphere(targetPosition, 0.5f))
-            {
-                startPosition = transform.position;
-                moving = true;
-            }
         }
     }
 
