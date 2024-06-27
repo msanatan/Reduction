@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     Vector3 startPosition;
     Vector3 scaleVector;
     bool moving = false;
+    bool gameOver = false;
 
     void Awake()
     {
@@ -42,7 +43,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnMovementPerformed(InputAction.CallbackContext context)
     {
-        if (moving) return; // No new inputs while moving
+        if (moving || gameOver) return; // No new inputs while moving
 
         moveVector = context.ReadValue<Vector2>();
         if (moveVector.y == 1)
@@ -109,6 +110,7 @@ public class PlayerController : MonoBehaviour
         if (transform.localScale.x <= 0)
         {
             Debug.Log("Game over");
+            gameOver = true;
             gameOverEvent.Invoke();
         }
     }
