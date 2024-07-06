@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -7,10 +8,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float moveSpeed = 5f;
     [SerializeField] float snapDistance = 1f;
     [SerializeField] float scaleReduction = 0.1f;
+    [SerializeField] float minimumSwipeMagnitude = 10f;
     [SerializeField] Transform cameraTransform;
     public UnityEvent gameOverEvent;
     PlayerMovement input = null;
     Vector2 moveVector = Vector2.zero;
+    Vector2 swipeDirection;
     Vector3 targetPosition;
     Vector3 startPosition;
     Vector3 scaleVector;
@@ -25,15 +28,19 @@ public class PlayerController : MonoBehaviour
     void OnEnable()
     {
         input.Enable();
-        input.Player.Movement.performed += OnMovementPerformed;
-        input.Player.Movement.canceled += OnMovementCancelled;
+        input.Player.Keys.performed += OnMovementPerformed;
+        input.Player.Keys.canceled += OnMovementCancelled;
+        input.Player.Swipe.performed += OnSwipeDeltaPerformed;
+        input.Player.Touch.canceled += OnTouchCancelled;
     }
 
     void OnDisable()
     {
         input.Enable();
-        input.Player.Movement.performed -= OnMovementPerformed;
-        input.Player.Movement.canceled -= OnMovementCancelled;
+        input.Player.Keys.performed -= OnMovementPerformed;
+        input.Player.Keys.canceled -= OnMovementCancelled;
+        input.Player.Swipe.performed -= OnSwipeDeltaPerformed;
+        input.Player.Touch.canceled -= OnTouchCancelled;
     }
 
     private void OnMovementCancelled(InputAction.CallbackContext context)
@@ -61,6 +68,49 @@ public class PlayerController : MonoBehaviour
         else if (moveVector.x == -1)
         {
             targetPosition = transform.position + Vector3.left;
+        }
+
+        if (Physics.CheckSphere(targetPosition, 0.5f))
+        {
+            startPosition = transform.position;
+            moving = true;
+        }
+    }
+
+    private void OnSwipeDeltaPerformed(InputAction.CallbackContext context)
+    {
+        swipeDirection = context.ReadValue<Vector2>();
+    }
+
+    private void OnTouchCancelled(InputAction.CallbackContext context)
+    {
+        // Ignore if swipe isn't strong enough
+        if (Mathf.Abs(swipeDirection.magnitude) < minimumSwipeMagnitude) return;
+
+        if (moving || gameOver) return; // No new inputs while moving
+
+        if (Mathf.Abs(swipeDirection.y) > Mathf.Abs(swipeDirection.x))
+        {
+            if (swipeDirection.y > 0)
+            {
+                targetPosition = transform.position + Vector3.forward;
+            }
+            else if (swipeDirection.y < 0)
+            {
+                targetPosition = transform.position + Vector3.back;
+            }
+        }
+        else
+        {
+            if (swipeDirection.x > 0)
+            {
+                targetPosition = transform.position + Vector3.right;
+            }
+            else if (swipeDirection.x < 0)
+            {
+                targetPosition = transform.position + Vector3.left;
+            }
+
         }
 
         if (Physics.CheckSphere(targetPosition, 0.5f))
