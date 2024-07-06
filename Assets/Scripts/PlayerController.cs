@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
 
     void OnDisable()
     {
-        input.Enable();
+        input.Disable();
         input.Player.Keys.performed -= OnMovementPerformed;
         input.Player.Keys.canceled -= OnMovementCancelled;
         input.Player.Swipe.performed -= OnSwipeDeltaPerformed;
@@ -53,28 +53,7 @@ public class PlayerController : MonoBehaviour
         if (moving || gameOver) return; // No new inputs while moving
 
         moveVector = context.ReadValue<Vector2>();
-        if (moveVector.y == 1)
-        {
-            targetPosition = transform.position + Vector3.forward;
-        }
-        else if (moveVector.y == -1)
-        {
-            targetPosition = transform.position + Vector3.back;
-        }
-        else if (moveVector.x == 1)
-        {
-            targetPosition = transform.position + Vector3.right;
-        }
-        else if (moveVector.x == -1)
-        {
-            targetPosition = transform.position + Vector3.left;
-        }
-
-        if (Physics.CheckSphere(targetPosition, 0.5f))
-        {
-            startPosition = transform.position;
-            moving = true;
-        }
+        DetermineTargetPosition(moveVector);
     }
 
     private void OnSwipeDeltaPerformed(InputAction.CallbackContext context)
@@ -91,33 +70,14 @@ public class PlayerController : MonoBehaviour
 
         if (Mathf.Abs(swipeDirection.y) > Mathf.Abs(swipeDirection.x))
         {
-            if (swipeDirection.y > 0)
-            {
-                targetPosition = transform.position + Vector3.forward;
-            }
-            else if (swipeDirection.y < 0)
-            {
-                targetPosition = transform.position + Vector3.back;
-            }
+            moveVector = new Vector2(0, swipeDirection.y > 0 ? 1 : -1);
         }
         else
         {
-            if (swipeDirection.x > 0)
-            {
-                targetPosition = transform.position + Vector3.right;
-            }
-            else if (swipeDirection.x < 0)
-            {
-                targetPosition = transform.position + Vector3.left;
-            }
-
+            moveVector = new Vector2(swipeDirection.x > 0 ? 1 : -1, 0);
         }
 
-        if (Physics.CheckSphere(targetPosition, 0.5f))
-        {
-            startPosition = transform.position;
-            moving = true;
-        }
+        DetermineTargetPosition(moveVector);
     }
 
     void Start()
@@ -129,7 +89,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (moving)
@@ -144,6 +103,32 @@ public class PlayerController : MonoBehaviour
 
             transform.position += (targetPosition - startPosition) * moveSpeed * Time.deltaTime;
             return;
+        }
+    }
+
+    void DetermineTargetPosition(Vector2 direction)
+    {
+        if (direction.y == 1)
+        {
+            targetPosition = transform.position + Vector3.forward;
+        }
+        else if (direction.y == -1)
+        {
+            targetPosition = transform.position + Vector3.back;
+        }
+        else if (direction.x == 1)
+        {
+            targetPosition = transform.position + Vector3.right;
+        }
+        else if (direction.x == -1)
+        {
+            targetPosition = transform.position + Vector3.left;
+        }
+
+        if (Physics.CheckSphere(targetPosition, 0.5f))
+        {
+            startPosition = transform.position;
+            moving = true;
         }
     }
 
