@@ -9,7 +9,7 @@ public class NonWebUIManager : MonoBehaviour
 
     void Start()
     {
-        if (!(Application.platform == RuntimePlatform.WebGLPlayer || (showInEditor && Application.isEditor)))
+        if (Application.platform == RuntimePlatform.WebGLPlayer || (Application.isEditor && !showInEditor))
         {
             foreach (GameObject ui in mobileUI)
             {
