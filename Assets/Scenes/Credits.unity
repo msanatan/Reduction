@@ -272,7 +272,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Return to Menu
+  m_text: Main Menu
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 601b086423982472ba1c453355e50a7c, type: 2}
   m_sharedMaterial: {fileID: -2732203646224945817, guid: 601b086423982472ba1c453355e50a7c, type: 2}
@@ -383,8 +383,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1408, y: 256}
+  m_AnchoredPosition: {x: 0, y: 448}
+  m_SizeDelta: {x: 1408, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1031262812
 MonoBehaviour:
@@ -738,10 +738,10 @@ PrefabInstance:
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 992333248569598686, guid: 0249a65792f314f4687b45e756dc0c84, type: 3}
       insertIndex: 0
-      addedObject: {fileID: 2076580944}
+      addedObject: {fileID: 1031262811}
     - targetCorrespondingSourceObject: {fileID: 992333248569598686, guid: 0249a65792f314f4687b45e756dc0c84, type: 3}
       insertIndex: 1
-      addedObject: {fileID: 1031262811}
+      addedObject: {fileID: 2076580944}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0249a65792f314f4687b45e756dc0c84, type: 3}
 --- !u!114 &1914056816 stripped
@@ -796,8 +796,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -384}
-  m_SizeDelta: {x: 704, y: 128}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 448, y: 128}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2076580945
 MonoBehaviour:
